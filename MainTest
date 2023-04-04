@@ -1,0 +1,52 @@
+//Question: Remove duplicates from a given integer array without using java collections
+import java.util.Arrays;
+
+public class MainTest {
+    static String output = "";
+
+    public static void main(String[] args) {
+        int[][] array = {
+                {3, 1, 2, 2, 3, 6, 8},
+                {1, 1, 1, 1, 1, 1, 1},
+                {1, 2, 3, 4, 5, 6, 7},
+                {1, 2, 1, 1, 1, 1, 1}
+        };
+        for (int[] subArray : array) {
+            output = "";
+            char[] outputArray = removeDuplicates(subArray).toCharArray();
+            int[] output = new int[outputArray.length];
+            for (int i = 0; i < outputArray.length; i++) {
+                output[i] = outputArray[i] - '0';
+            }
+            System.out.println(Arrays.toString(output));
+        }
+    }
+
+    //This method checks if a given number is present in the array
+    public static boolean isAlreadyPresent(int number, int[] numbers) {
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //This method removes the duplicates in an array and return a concatenated
+    //string ie {1,2,2,3} to "123"
+    public static String removeDuplicates(int[] input) {
+        //construct a new array to add distinct values. ie, after removing duplicates
+        int[] newArray = new int[input.length];
+
+        // Read every element of the array
+        for (int i = 0; i < input.length; i++) {
+            //Add only if the element is not already added/present in the newArray
+            if (!(isAlreadyPresent(input[i], newArray))) {
+                newArray[i] = input[i];
+                output += input[i];
+            }
+
+        }
+        return output;
+    }
+}
